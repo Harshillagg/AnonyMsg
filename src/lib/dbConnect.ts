@@ -7,6 +7,7 @@ interface ConnectionObject{
 const connection:ConnectionObject = {}
 
 async function dbConnect() : Promise<void>{
+    // is already connected to the database or not
     if(connection.isConnected){
         console.log("Already connected to database")
         return

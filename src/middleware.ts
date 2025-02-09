@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
-export { default } from 'next-auth/middleware'
+export { default } from 'next-auth/middleware' // auth for entire website now 
 
 export async function middleware(request: NextRequest) {
 
@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
-  if(!token && !(url.pathname.startsWith('/dashboard'))){
+  if(!token && url.pathname.startsWith('/dashboard')){
     return NextResponse.redirect(new URL('/sign-in', request.url))
   }
 

@@ -23,15 +23,14 @@ export async function POST(request: Request) {
         }
 
         // Check if email already exists
-        const existingUserVerifiedByEmail = await User.findOne({
-            email,
-            isVerified: true
+        const existingUserByEmail = await User.findOne({
+            email
         })
         const verifyCode = Math.floor(100000 + Math.random() * 900000).toString()
         
-        if(existingUserVerifiedByEmail){
+        if(existingUserByEmail){
             // if user is already verified
-            if(existingUserVerifiedByEmail.isVerified){
+            if(existingUserByEmail.isVerified){
                 return Response.json({ 
                     success: false, 
                     message: "USer already exist with this email" 
@@ -40,10 +39,10 @@ export async function POST(request: Request) {
             // if not verified but registered
             else{
                 const hashedPassword = await bcrypt.hash(password, 10)
-                existingUserVerifiedByEmail.password = hashedPassword
-                existingUserVerifiedByEmail.verifyCode = verifyCode
-                existingUserVerifiedByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000)
-                await existingUserVerifiedByEmail.save()
+                existingUserByEmail.password = hashedPassword
+                existingUserByEmail.verifyCode = verifyCode
+                existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000)
+                await existingUserByEmail.save()
             }
         }
         else{
