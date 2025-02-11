@@ -2,6 +2,7 @@ import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User.model";
 import bcrypt from "bcryptjs";
 import { sendVerificationEmail } from "@/lib/resend";
+import { ApiRes } from "@/utils/ApiRes";
 
 export async function POST(request: Request) {
     await dbConnect() // Connect to database in every request
@@ -16,10 +17,7 @@ export async function POST(request: Request) {
         })
 
         if(existingUserVerifiedByUsername){
-            return Response.json({
-                success: false,
-                mesage: "Username already exists"
-            }, {status: 400})
+            return ApiRes(false, "Username already exists", 400)
         }
 
         // Check if email already exists
@@ -31,10 +29,7 @@ export async function POST(request: Request) {
         if(existingUserByEmail){
             // if user is already verified
             if(existingUserByEmail.isVerified){
-                return Response.json({ 
-                    success: false, 
-                    message: "USer already exist with this email" 
-                },{status: 400})
+                return ApiRes(false, "Email already taken", 400)
             }
             // if not verified but registered
             else{
@@ -73,23 +68,14 @@ export async function POST(request: Request) {
         )
 
         if(!emailResponse.success){
-            return Response.json({ 
-                success: false, 
-                message: emailResponse.message 
-            },{status: 500})
+            return ApiRes(false, emailResponse.message, 500)
         }
 
-        return Response.json({ 
-            success: true, 
-            message: "User registered successfully. Please verify your email." 
-        },{status: 201})
+        return ApiRes(true, "User registered successfully, Please verify your email", 201)
 
     }
     catch (error) {
         console.error("Error Registering user : ", error)   
-        return Response.json({ 
-            success: false, 
-            message: "Error Registering user" 
-        },{status: 500})
+        return ApiRes(false, "Error Registering User", 500)
     }
 } 
