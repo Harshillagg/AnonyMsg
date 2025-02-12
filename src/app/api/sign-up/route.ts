@@ -3,21 +3,33 @@ import User from "@/models/User.model";
 import bcrypt from "bcryptjs";
 import { sendVerificationEmail } from "@/lib/resend";
 import { ApiRes } from "@/utils/ApiRes";
+import { NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     await dbConnect() // Connect to database in every request
 
     try {
         const { username, email, password } = await request.json()
         
         // Check if username already exists
-        const existingUserVerifiedByUsername = await User.findOne({
-            username,
-            isVerified: true
+        const existingUserByUsername = await User.findOne({
+            username
         })
-
-        if(existingUserVerifiedByUsername){
-            return ApiRes(false, "Username already exists", 400)
+        
+        // if username already exists
+        if(existingUserByUsername){
+            // if user is already verified
+            if(existingUserByUsername.isVerified){
+                return ApiRes(false, "Username already taken", 400)
+            }
+            
+            // if not verified but 
+            if(existingUserByUsername.verifyCodeExpiry > new Date()){
+                return ApiRes(false, "Username is reserved but not verified. Please wait until it expires.", 400);
+            }
+        
+            // If the verification code has expired, allow the new registration
+            await existingUserByUsername.deleteOne();
         }
 
         // Check if email already exists
@@ -33,6 +45,7 @@ export async function POST(request: Request) {
             }
             // if not verified but registered
             else{
+                existingUserByEmail.username = username
                 const hashedPassword = await bcrypt.hash(password, 10)
                 existingUserByEmail.password = hashedPassword
                 existingUserByEmail.verifyCode = verifyCode

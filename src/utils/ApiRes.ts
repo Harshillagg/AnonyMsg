@@ -1,5 +1,7 @@
+import { NextResponse } from "next/server";
+
 export const ApiRes = (success:boolean, message:string, status:number) => {
-    return Response.json({
+    return NextResponse.json({
         success, 
         message 
     }, { status });

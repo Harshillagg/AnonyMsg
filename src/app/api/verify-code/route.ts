@@ -3,12 +3,13 @@ import {z} from "zod";
 import UserModel from "@/models/User.model";
 import { ApiRes } from "@/utils/ApiRes";
 import { verifySchema } from "@/schemas/verifySchema";
+import { NextRequest } from "next/server";
 
 const queryCodeSchema = z.object({
     code: verifySchema
 })
 
-export async function POST(request : Request){
+export async function POST(request : NextRequest){
     await dbConnect()
 
     try {

@@ -3,8 +3,9 @@ import { getServerSession, User } from "next-auth"
 import UserModel from "@/models/User.model"
 import { ApiRes } from "@/utils/ApiRes"
 import { authOptions } from "../auth/[...nextauth]/options"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function POST(request : Request){
+export async function POST(request : NextRequest){
     await dbConnect()
 
     const session = await getServerSession(authOptions)
@@ -33,7 +34,7 @@ export async function POST(request : Request){
 
 }
 
-export async function GET(request : Request){
+export async function GET(){
     await dbConnect()
 
     const session = await getServerSession(authOptions)
@@ -44,14 +45,14 @@ export async function GET(request : Request){
     const userId = user._id
 
     try {
-        const newUser = await UserModel.findOne({ userId })
+        const newUser = await UserModel.findById(userId)
 
         if(!newUser) return ApiRes(false, "User not found", 404)
         
-        return Response.json({
+        return NextResponse.json({
             status : "true",
             isAcceptingMessages : newUser.isAcceptingMessage
-        },{status : 200})
+        },{status : 200, })
     }
     catch (error) {
         console.log("error getting accepting status", error)
