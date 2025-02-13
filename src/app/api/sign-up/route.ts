@@ -15,6 +15,8 @@ export async function POST(request: NextRequest) {
         const existingUserByUsername = await User.findOne({
             username
         })
+
+        const lowerEmail = email.toLowerCase()
         
         // if username already exists
         if(existingUserByUsername){
@@ -34,7 +36,7 @@ export async function POST(request: NextRequest) {
 
         // Check if email already exists
         const existingUserByEmail = await User.findOne({
-            email
+            email : lowerEmail
         })
         const verifyCode = Math.floor(100000 + Math.random() * 900000).toString()
         
@@ -61,7 +63,7 @@ export async function POST(request: NextRequest) {
 
             const newUser = new User({
                 username,
-                email,
+                email : lowerEmail,
                 password: hashedPassword,
                 verifyCode,
                 verifyCodeExpiry: expiryDate,
@@ -75,7 +77,7 @@ export async function POST(request: NextRequest) {
 
         // send verification email now
         const emailResponse = await sendVerificationEmail(
-            email,
+            lowerEmail,
             username,
             verifyCode
         )

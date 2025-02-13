@@ -142,6 +142,7 @@ export default function SignIn() {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
+                      type="email"
                       placeholder="email"
                       {...field}
                     />
