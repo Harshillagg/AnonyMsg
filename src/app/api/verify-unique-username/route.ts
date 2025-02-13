@@ -33,11 +33,18 @@ export async function GET(request : NextRequest) {
 
         const {username} = result.data
 
-        const user = await UserModel.findOne({username, isVerified : true})
+        const user = await UserModel.findOne({username})
 
-        if(!user) return ApiRes(true, "Username is available", 201)
+        if(user){
+            if(user.isVerified || user.verifyCodeExpiry > new Date()){
+                return ApiRes(false, "Username already taken", 400)
+            }
+        
+            // If the verification code has expired, allow the new registration
+            await user.deleteOne();
+        }
 
-        return ApiRes(false, "Username is already taken", 400)
+        return ApiRes(true, "Usenrame is available", 201)
     }
     catch (error) {
         console.log("error checking username : ", error)
