@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDebounceCallback } from "usehooks-ts";
@@ -45,9 +45,9 @@ export default function SignIn() {
 
   useEffect(() => {
     const checkUniqueUsername = async () => {
+      setUsernameStatus("");
       if (username) {
         setIsCheckingUsername(true);
-        setUsernameStatus("...");
         try {
           const result = await axios.get(
             `/api/verify-unique-username?username=${username}`
@@ -77,7 +77,7 @@ export default function SignIn() {
           title: "Success",
           description: result.data.message,
         });
-        router.replace(`/verify/${username}`);
+        router.replace(`/verify-code/${username}`);
       } else {
         toast({
           title: "Error",
@@ -128,8 +128,10 @@ export default function SignIn() {
                       }}
                     />
                   </FormControl>
-                  {isCheckingUsername && <Loader2 className="animate-spin" />}
-                  <p className= {`text-sm ${usernameStatus === "Usenrame is available" ? "text-green-500" : "text-red-500"}`} >test {usernameStatus}</p>
+                  <div>
+                    {isCheckingUsername && <Loader2 className="animate-spin" />}
+                    <p className= {`text-sm ${usernameStatus === "Username is available" ? "text-green-500" : "text-red-500"}`} >{usernameStatus}</p>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -171,7 +173,7 @@ export default function SignIn() {
             <Button type="submit" disabled = {isSubmitting}>
               {
                 isSubmitting ? (
-                  <div>
+                  <div className="flex items-center justify-center">
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Please Wait
                   </div>

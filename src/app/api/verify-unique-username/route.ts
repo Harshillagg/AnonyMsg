@@ -14,15 +14,13 @@ export async function GET(request : NextRequest) {
 
     try {
         const searchParams = request.nextUrl.searchParams 
+        // const decodedUsername = decodeURIComponent(username) // to decode params from url if encoded automatically
 
         const queryParams = {
             username: searchParams.get('username')
         }
 
         const result = queryUsernameSchema.safeParse(queryParams)
-
-        console.log("queryParams : ", queryParams)
-        console.log("result : ", result)
 
         if(!result.success){
             const errorMessage = result.error.format().username?._errors || []
@@ -44,7 +42,7 @@ export async function GET(request : NextRequest) {
             await user.deleteOne();
         }
 
-        return ApiRes(true, "Usenrame is available", 201)
+        return ApiRes(true, "Username is available", 201)
     }
     catch (error) {
         console.log("error checking username : ", error)

@@ -6,7 +6,7 @@ import { verifySchema } from "@/schemas/verifySchema";
 import { NextRequest } from "next/server";
 
 const queryCodeSchema = z.object({
-    code: verifySchema
+    code: verifySchema.shape.code
 })
 
 export async function POST(request : NextRequest){
@@ -14,8 +14,6 @@ export async function POST(request : NextRequest){
 
     try {
         const {username, code} = await request.json()
-        
-        // const decodedUsername = decodeURIComponent(username) // to decode params from url if encoded automatically
 
         const result = queryCodeSchema.safeParse({code})
 
