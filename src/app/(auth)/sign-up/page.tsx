@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 
-export default function SignIn() {
+export default function SignUp() {
   const [username, setUsername] = useState<string>("");
   const [usernameStatus, setUsernameStatus] = useState<string>("");
   const [isCheckingUsername, setIsCheckingUsername] = useState<boolean>(false);

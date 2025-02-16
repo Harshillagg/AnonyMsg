@@ -30,7 +30,7 @@ export const authOptions : NextAuthOptions = {
                         //     {username : credentials.username}
                         // ]
 
-                        email : credentials.email
+                        email : credentials.email.toLowerCase()
                     })
 
                     if(!user) throw new Error('No user found with this email')
