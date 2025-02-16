@@ -76,6 +76,7 @@ export default function SignUp() {
         toast({
           title: "Success",
           description: result.data.message,
+          className: "bg-green-500",
         });
         router.replace(`/verify-code/${username}`);
       } else {
@@ -100,8 +101,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-8 my-10 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Join <br/>
@@ -170,18 +171,20 @@ export default function SignUp() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled = {isSubmitting}>
-              {
-                isSubmitting ? (
-                  <div className="flex items-center justify-center">
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Please Wait
-                  </div>
-                ) : "Sign Up"
-              }
-            </Button>
+            <div className="text-center">
+              <Button type="submit" disabled = {isSubmitting} className="">
+                {
+                  isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please Wait
+                    </div>
+                  ) : "Sign Up"
+                }
+              </Button>
+            </div>
           </form>
-          <div className="text-center mt-4">
+          <div className="text-center">
               <p>
                 Already have an account?{" "}
                 <Link href="/sign-in" className="text-blue-500 hover:text-blue-800">

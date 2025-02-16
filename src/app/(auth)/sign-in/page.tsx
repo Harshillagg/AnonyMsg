@@ -66,8 +66,8 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-8 my-20 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Join <br/>
@@ -112,20 +112,22 @@ export default function SignIn() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled = {isSubmitting}>
-              {
-                isSubmitting ? (
-                  <div className="flex items-center justify-center">
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Please Wait
-                  </div>
-                ) : "Sign In"
-              }
-            </Button>
+            <div className="text-center">
+              <Button type="submit" disabled = {isSubmitting}>
+                {
+                  isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please Wait
+                    </div>
+                  ) : "Sign In"
+                }
+              </Button>
+            </div>
           </form>
           <div className="text-center mt-4">
               <p>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href="/sign-up" className="text-blue-500 hover:text-blue-800">
                   Sign Up
                 </Link>

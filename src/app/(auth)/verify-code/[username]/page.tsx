@@ -43,6 +43,7 @@ export default function VerifyCodePage() {
         toast({
           title: "User verified successfully",
           description: response.data.message,
+          className: "bg-green-500",
         });
         router.replace("/sign-in");
       } else {
