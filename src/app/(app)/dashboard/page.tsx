@@ -56,7 +56,7 @@ export default function Dashboard(){
 
       console.log(acceptMessages)
     }
-  }, [setValue, toast])
+  }, [setValue, toast, acceptMessages])
 
   const getAllMessages = useCallback(async (refresh: boolean = false) => {
     setIsLoading(true)
