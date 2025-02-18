@@ -13,15 +13,13 @@ export async function POST(request : NextRequest){
 
     if(!session || !user) return ApiRes(false, "Unauthorised Access", 401)
 
-    // console.log("session", session)
-
     // IMP :- this _id is string bcoz we saved it like this in auth options ... so it will work in findbyidandupdate or findone but not while using pipelines
     const userId = user._id
 
     const {messageFlag} = await request.json()
 
     try{
-        const updatedUser = await UserModel.findByIdAndUpdate(userId, {acceptingMessages: messageFlag}, {new: true})
+        const updatedUser = await UserModel.findByIdAndUpdate(userId, {isAcceptingMessages: messageFlag}, {new: true})
 
         if(!updatedUser) return ApiRes(false, "Failed to update status", 401)
 
@@ -51,7 +49,7 @@ export async function GET(){
         
         return NextResponse.json({
             status : "true",
-            isAcceptingMessages : newUser.isAcceptingMessage
+            isAcceptingMessages : newUser.isAcceptingMessages
         },{status : 200, })
     }
     catch (error) {

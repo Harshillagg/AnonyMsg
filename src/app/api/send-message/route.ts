@@ -12,8 +12,8 @@ export async function POST(request : NextRequest){
     try {
         const user = await UserModel.findOne({username})
         if(!user) return ApiRes(false, "User not found", 400)
-
-        if(!user.isAcceptingMessage) return ApiRes(false, "User is not accepting messages", 400)
+        
+        if(!user.isAcceptingMessages) return ApiRes(false, "User is not accepting messages", 400)
         
         const newMessage = {content, createdAt: new Date()}
         user.messages.push(newMessage as Message)

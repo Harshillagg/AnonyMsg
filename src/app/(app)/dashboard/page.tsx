@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 export default function Dashboard(){
   const {toast} = useToast()
   const [messages, setMessages] = useState<Message[]>([])
-  const [isLoading, setIsLoading] = useState<Boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isSwitchLoading, setIsSwitchLoading] = useState(false)
 
   // optimistic update
@@ -41,7 +41,7 @@ export default function Dashboard(){
 
     try{
       const response = await axios.get<ApiResponse>('/api/accept-message')
-      setValue('acceptMessages', response.data.isAcceptingMessage)
+      setValue('acceptMessages', response.data.isAcceptingMessages)
     }
     catch(error){
       const axiosError = error as AxiosError<ApiResponse>
@@ -53,8 +53,10 @@ export default function Dashboard(){
     }
     finally{
       setIsSwitchLoading(false)
+
+      console.log(acceptMessages)
     }
-  }, [setValue])
+  }, [setValue, toast])
 
   const getAllMessages = useCallback(async (refresh: boolean = false) => {
     setIsLoading(true)
@@ -80,7 +82,7 @@ export default function Dashboard(){
     finally{
       setIsLoading(false)
     }
-  }, [setMessages, setIsLoading])
+  }, [setMessages, setIsLoading, toast])
 
   useEffect(() => {
     if(!session || !session.user) return
@@ -108,6 +110,8 @@ export default function Dashboard(){
     }
   }
 
+  if(!session || !session.user) return <div>Login Please</div>
+
   const {username} = session?.user as User
   const baseUrl = `${window.location.origin}`
   const profileUrl = `${baseUrl}/u/${username}`
@@ -119,8 +123,6 @@ export default function Dashboard(){
       className: "bg-green-500",
     })
   }
-
-  if(!session || !session.user) return <div>Login Please</div>
 
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">

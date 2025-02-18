@@ -24,11 +24,11 @@ export async function GET(){
             { $group: { _id: "$_id", messages: { $push: "$messages" } } }
         ])
 
-        if(!user || user.length === 0) return ApiRes(false, "User not found", 401)
+        if(!user) return ApiRes(false, "User not found", 401)
 
         return NextResponse.json({
             success : true,
-            messages : user[0].messages
+            messages : user.length > 0 ? user[0].messages : []
         }, {status: 200})
     }
     catch (error) {
