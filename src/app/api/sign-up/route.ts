@@ -1,9 +1,9 @@
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User.model";
 import bcrypt from "bcryptjs";
-import { sendVerificationEmail } from "@/lib/resend";
 import { ApiRes } from "@/utils/ApiRes";
 import { NextRequest } from "next/server";
+import { sendEmail } from "@/lib/brevo";
 
 export async function POST(request: NextRequest) {
     await dbConnect() // Connect to database in every request
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
         }
 
         // send verification email now
-        const emailResponse = await sendVerificationEmail(
+        const emailResponse = await sendEmail(
             lowerEmail,
             username,
             verifyCode
