@@ -17,7 +17,7 @@ const NotFound = () => {
 
   useEffect(() => {
     if (count === 0) router.push('/');
-  }, [count]);
+  }, [count, router]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-gray-100 p-4">
@@ -31,8 +31,8 @@ const NotFound = () => {
           <h1 className="text-4xl font-bold tracking-tight">404</h1>
           <h2 className="text-xl text-gray-400">Message Not Found</h2>
           <p className="text-gray-500">
-            The anonymous message you're looking for seems to have disappeared into the digital void.
-            Perhaps it was never here, or maybe it's been lost in transmission.
+            The anonymous message you&apos;re looking for seems to have disappeared into the digital void.
+            Perhaps it was never here, or maybe it&apos;s been lost in transmission.
           </p>
           <p className="text-gray-500">
             Redirecting to the home page in {count} seconds.

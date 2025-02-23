@@ -53,10 +53,8 @@ export default function Dashboard(){
     }
     finally{
       setIsSwitchLoading(false)
-
-      console.log(acceptMessages)
     }
-  }, [setValue, toast])
+  }, [setValue, toast, acceptMessages])
 
   const getAllMessages = useCallback(async (refresh: boolean = false) => {
     setIsLoading(true)
