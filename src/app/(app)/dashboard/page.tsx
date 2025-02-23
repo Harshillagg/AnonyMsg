@@ -56,7 +56,7 @@ export default function Dashboard(){
 
       console.log(acceptMessages)
     }
-  }, [setValue, toast, acceptMessages])
+  }, [setValue, toast])
 
   const getAllMessages = useCallback(async (refresh: boolean = false) => {
     setIsLoading(true)
@@ -125,7 +125,7 @@ export default function Dashboard(){
   }
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl pt-20">
       <h1 className="text-4xl font-bold mb-4">
         User Dashboard
       </h1>
