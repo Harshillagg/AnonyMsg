@@ -58,15 +58,15 @@ export default function MessageCard({
 
   return (
     <div>
-      <Card>
+      <Card className="bg-gray-100 border-gray-900 hover:bg-gray-300 shadow-xl hover:scale-105">
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle>Message</CardTitle>
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="destructive">
-                  <X className="h-4 w-4" />
+                <Button variant="destructive" className="px-3">
+                  <X className="" />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>

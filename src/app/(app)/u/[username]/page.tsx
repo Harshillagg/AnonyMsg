@@ -107,8 +107,8 @@ export default function PublicPage() {
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl pt-20">
-      <h1 className="text-4xl font-bold mb-4">Post Your Message</h1>
+    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl pt-24">
+      <h1 className="text-4xl font-bold mb-4 text-center">Post Your Message</h1>
 
       <p></p>
 
@@ -120,12 +120,12 @@ export default function PublicPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Send Anonymous Message to {param.username}
+                  Send Anonymous Message to <span className="font-bold bg-slate-200 p-1">{param.username}</span>
                 </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Write your message here"
-                    className="resize-none"
+                    className="md:resize-none resize-y h-20"
                     {...field}
                   />
                 </FormControl>
@@ -151,20 +151,20 @@ export default function PublicPage() {
       <div className="my-6">
         <Button
           onClick={handleSuggestMessage}
-          className="w-full md:w-auto"
+          className="w-auto my-4"
           disabled={isLoading}
         >
           {isLoading ? "Generating..." : "Suggest Message 🤔"}
         </Button>
 
-        <p>click on any message below to select it</p>
+        <p className="text-end text-sm text-gray-800">click on any message below to select it</p>
 
-        <div className="border border-gray-400 p-4">
-          <h2>Messages :</h2>
+        <div className="border border-black p-4 rounded-lg bg-gray-200 md:px-10">
+          <h2 className="font-semibold pb-2">Messages :</h2>
           <div>
             {questions.map((question, index) => (
               <div
-                className="border p-2 mb-2 hover:bg-gray-200 text-center text-wrap"
+                className="border p-2 mb-2 bg-gray-300 hover:bg-gray-400 cursor-pointer border-black hover:scale-105 transition rounded-lg text-center text-wrap"
                 key={index}
                 onClick={() => handleSelectMessage(question)}
               >

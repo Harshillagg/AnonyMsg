@@ -13,15 +13,15 @@ import Image from "next/image"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-300 flex flex-col items-center px-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-300 flex flex-col items-center md:px-20 px-8">
       <main className="flex-1">
         {/* Hero div */}
-        <div className="w-full pt-12 md:pt-24 bg-">
+        <div className="w-full pt-32 md:pt-24">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+              <div className="flex flex-col justify-center space-y-4 md:items-start items-center text-center md:text-start">
+                <div className="space-y-2 ">
+                  <h1 className="text-3xl  font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
                     Share Your Thoughts, Anonymously & Safely
                   </h1>
                   <p className="max-w-[600px] text-gray-500 md:text-xl">

@@ -123,8 +123,8 @@ export default function Dashboard(){
   }
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl pt-20">
-      <h1 className="text-4xl font-bold mb-4">
+    <div className="p-6 md:p-10 bg-white rounded w-full max-w-6xl md:pt-24 pt-40 mx-auto">
+      <h1 className="md:text-4xl text-2xl font-bold mb-4">
         User Dashboard
       </h1>
 
