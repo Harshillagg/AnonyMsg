@@ -1,6 +1,6 @@
 import axios from "axios";
 import { render } from "@react-email/render"; // Converts React Email to HTML
-import VerificationEmail from "../../emails/VerificationEmail";
+import VerificationEmail from "../components/VerificationEmail";
 
 export async function sendEmail(email: string, username: string, verifyCode: string) {
   const apiKey = process.env.BREVO_API_KEY;

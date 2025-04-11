@@ -8,6 +8,7 @@ const NotFound = () => {
   const router = useRouter();
     
   const [count, setCount] = useState(5);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCount(count - 1);
@@ -31,7 +32,7 @@ const NotFound = () => {
           <h1 className="text-4xl font-bold tracking-tight">404</h1>
           <h2 className="text-xl text-gray-400">Message Not Found</h2>
           <p className="text-gray-500">
-            The anonymous message you&apos;re looking for seems to have disappeared into the digital void.
+            The anonymous route you&apos;re looking for seems to have disappeared into the digital void.
             Perhaps it was never here, or maybe it&apos;s been lost in transmission.
           </p>
           <p className="text-gray-500">

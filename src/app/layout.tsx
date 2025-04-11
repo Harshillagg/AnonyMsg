@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
+import FadeWrapper from "@/components/FadeWrapper";
+import DelayedFallback from "@/components/DelayedFallback";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,9 +21,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "AnonyMsg",
   description: "AI Powered Anonymous Messaging Platform",
-  icons:{
-    icon : "/favicon.jpg",
-  }
+  icons: {
+    icon: "/favicon.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -35,8 +37,11 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Navbar/>
-          {children}
+          <DelayedFallback />
+            <FadeWrapper>
+              <Navbar />
+              {children}
+            </FadeWrapper>
           <Toaster />
         </body>
       </AuthProvider>
