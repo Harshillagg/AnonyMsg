@@ -9,10 +9,8 @@ const DelayedFallback = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-
     setLoading(true);
-    timer = setTimeout(() => setLoading(false), 400);
+    const timer = setTimeout(() => setLoading(false), 400);
 
     return () => {
       clearTimeout(timer);

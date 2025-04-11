@@ -15,7 +15,7 @@ export default function VerificationEmail({username,otp}:VerificationProps){
                     format: "woff2"
                 }} fontWeight={400} fontStyle="normal" />
             </Head> 
-            <Preview>Here's your verification code: {otp}</Preview>
+            <Preview>Here&apos;s your verification code: {otp}</Preview>
             <Section>
                 <Row>
                     <Heading as="h2">Hello {username},</Heading>

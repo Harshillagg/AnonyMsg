@@ -4,8 +4,7 @@ import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
-import FadeWrapper from "@/components/FadeWrapper";
-import DelayedFallback from "@/components/DelayedFallback";
+import PageWrapper from "@/components/PageWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,11 +36,10 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <DelayedFallback />
-            <FadeWrapper>
-              <Navbar />
-              {children}
-            </FadeWrapper>
+          <PageWrapper>
+            <Navbar />
+            {children}
+          </PageWrapper>
           <Toaster />
         </body>
       </AuthProvider>
